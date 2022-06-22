@@ -1,19 +1,19 @@
-version: '3.1'
+version: '3.8'
 
 services:
 
-  postgres:
+  db:
     image: postgres
     container_name: postgredb
     environment:
-      POSTGRES_USER: mtsouk
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: restapi
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./postgres:/var/lib/postgresql/data/
+      - ./postgres-data:/var/lib/postgresql/data/
+      - ./create_db.sql:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
       - 5432:5432
 
 volumes:
-  postgres_data:
+  db:
     driver: local
